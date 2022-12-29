@@ -9,7 +9,7 @@
 
 
 
-    <Button
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/btnPhoto"
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -17,10 +17,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:background="@drawable/photo_buton"/>
-
-
-
-
 
     <EditText
         android:id="@+id/edtName"

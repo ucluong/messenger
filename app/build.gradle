@@ -52,8 +52,7 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
     implementation 'com.google.firebase:firebase-auth-ktx'
     //circleimageview
-  //  implementation 'de.hdodenhof:circleimageview:3.1.0'
-
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // mô-đun https://github.com/lisawray/groupie
 //     implementation "com.github.lisawray.groupie:groupie"
