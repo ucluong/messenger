@@ -50,12 +50,14 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     //Firebase
     implementation platform('com.google.firebase:firebase-bom:31.1.1')
+    implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // mô-đun https://github.com/lisawray/groupie
-//     implementation "com.github.lisawray.groupie:groupie"
+
 
     // picaso Thư viện lưu trữ và tải xuống hình ảnh mạnh mẽ dành cho Android : https://github.com/square/picasso
 //    implementation 'com.squareup.picasso:picasso:2.8'

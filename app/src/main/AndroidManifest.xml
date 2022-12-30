@@ -16,14 +16,12 @@
             android:name=".ui.message.NewMessageActivity"
             android:exported="false">
             <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.message.MessengerActivity" />
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".ui.message.MessengerActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

@@ -1,8 +1,7 @@
 package com.example.fastchatmesss.ui.signup
 
-import android.app.Activity
+
 import android.content.Intent
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
@@ -11,9 +10,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.fastchatmesss.ui.message.MessengerActivity
 import com.example.fastchatmesss.R
 import com.example.fastchatmesss.base.BaseActivity
+import com.example.fastchatmesss.data.User
 import com.example.fastchatmesss.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_regisrer.*
+import java.util.UUID
 
 class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
     var selectPhotoUri : Uri? = null
@@ -32,17 +35,39 @@ class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
-                    val intent= Intent(this, MessengerActivity::class.java)
-                    intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
+
                 }
-                .addOnFailureListener {
-                    Toast.makeText(this, "ko thanhf coong :${it.message}", Toast.LENGTH_SHORT)
-                        .show()
-                }
+
+            uploadImageToFirebase()
         }
 
+
     }
+
+
+    private fun uploadImageToFirebase(){
+        if (selectPhotoUri== null)
+            return
+
+        val filename = UUID.randomUUID().toString()
+      val  ref  = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d("Register", " Successfully uploaded image : ${it.metadata?.path}")
+                ref.downloadUrl.addOnSuccessListener {
+                    Log.d("RegisterActivity", " File location:$it ")
+
+                    saveUserToFirabaseDatabase(it .toString())
+                }
+            }
+            . addOnFailureListener{
+                // do some loggin here
+            }
+
+
+    }
+
+
 
     override fun initViews() {
         // code phần tvAlready
@@ -65,10 +90,31 @@ class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
        uri?.let {
            selectPhotoUri = uri
            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
-           btnPhoto.setImageBitmap(bitmap)
+          btnPhoto.setImageBitmap(bitmap)
 //           val bitmapDrawable = BitmapDrawable(bitmap)
 //           btnPhoto.setBackgroundDrawable(bitmapDrawable)
        }
     }
 
+    // code saveUserToFirabaseDatabase
+    private fun saveUserToFirabaseDatabase(profileImageUri: String){
+        val uid= FirebaseAuth.getInstance().uid ?:""
+        val ref=  FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(uid, edtName.text.toString(),profileImageUri )
+        ref.setValue(user)
+            .addOnSuccessListener {
+                Log.d("RegisterActivity", " Finallu we saved the user to Firebase Databes")
+
+                val intent= Intent(this, MessengerActivity::class.java)
+                intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "ko thanhf coong :${it.message}", Toast.LENGTH_SHORT)
+                    .show()
+            }
+    }
+
 }
+
