@@ -13,7 +13,7 @@
         android:theme="@style/Theme.FastChatMesss"
         tools:targetApi="31">
         <activity
-            android:name=".ui.message.NewMessageActivity"
+            android:name=".ui.newmessage.NewMessageActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

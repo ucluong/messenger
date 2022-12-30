@@ -45,7 +45,6 @@ class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
         showLoading()
         if (selectPhotoUri == null)
             return
-
         val filename = UUID.randomUUID().toString()
         val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
         ref.putFile(selectPhotoUri!!)

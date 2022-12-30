@@ -36,14 +36,15 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
 
     override fun initActions() {
         btnLogin.setOnClickListener {
+            showLoading()
             val email = edtLoginEmail.text.toString()
             val password = edtLoginPasss.text.toString()
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
+                    hideLoading()
                     if (task.isSuccessful) {
                         val intent = Intent(this, MessengerActivity::class.java)
-                        intent.flags =
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
                     } else {
                         Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT)

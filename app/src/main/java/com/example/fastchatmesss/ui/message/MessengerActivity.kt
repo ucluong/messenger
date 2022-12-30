@@ -7,12 +7,12 @@ import com.example.fastchatmesss.R
 import com.example.fastchatmesss.base.BaseActivity
 import com.example.fastchatmesss.data.User
 import com.example.fastchatmesss.ui.login.LoginActivity
+import com.example.fastchatmesss.ui.newmessage.NewMessageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_messenger.*
 
 class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
@@ -28,7 +28,7 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
             intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or((Intent.FLAG_ACTIVITY_NEW_TASK))
             startActivity(intent)
         }
-
+        showLoading()
         FirebaseDatabase.getInstance().getReference("/users").addListenerForSingleValueEvent(object  : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val usersList = mutableListOf<User>()
@@ -39,9 +39,11 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
                     }
                 }
                 messengerAdapter.usersList = usersList
+                hideLoading()
             }
 
             override fun onCancelled(error: DatabaseError) {
+                hideLoading()
             }
         })
 
@@ -58,7 +60,7 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_new_message->{
-                val intent= Intent(this,NewMessageActivity::class.java )
+                val intent= Intent(this, NewMessageActivity::class.java )
                 startActivity(intent)
             }
             R.id.menu_sign_out->{

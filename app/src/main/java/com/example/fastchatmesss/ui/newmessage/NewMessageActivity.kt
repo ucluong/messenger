@@ -1,4 +1,4 @@
-package com.example.fastchatmesss.ui.message
+package com.example.fastchatmesss.ui.newmessage
 
 
 
