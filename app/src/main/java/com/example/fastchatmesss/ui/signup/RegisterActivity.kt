@@ -40,6 +40,10 @@ class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
         }
     }
 
+    override fun putExtra(keyData: String, it: User) {
+        TODO("Not yet implemented")
+    }
+
 
     private fun uploadImageToFirebase() {
         showLoading()

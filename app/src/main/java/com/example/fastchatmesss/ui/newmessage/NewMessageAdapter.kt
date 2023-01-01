@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fastchatmesss.R
+
 import com.example.fastchatmesss.data.User
 import kotlinx.android.synthetic.main.item_me.view.*
 import kotlinx.android.synthetic.main.item_you.view.*
@@ -13,13 +14,16 @@ import kotlinx.android.synthetic.main.item_you.view.*
 const val VIEW_TYPE_ME = 1
 const val VIEW_TYPE_YOU = 2
 
-class NewMessageAdapter (val onClick : (User) -> Unit ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NewMessageAdapter(val onClick: (User) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var data = mutableListOf<String>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
+
         }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
@@ -47,6 +51,7 @@ class NewMessageAdapter (val onClick : (User) -> Unit ): RecyclerView.Adapter<Re
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder.itemViewType){
             VIEW_TYPE_ME -> {(holder as? ViewHolderMe)?.bind(data[position])}
+
             VIEW_TYPE_YOU -> {(holder as? ViewHolderYou)?.bind(data[position])}
         }
     }
@@ -54,15 +59,26 @@ class NewMessageAdapter (val onClick : (User) -> Unit ): RecyclerView.Adapter<Re
     override fun getItemCount(): Int = data.size
 
 
-    inner class ViewHolderMe(view: View) : RecyclerView.ViewHolder(view) {
+
+    inner class ViewHolderMe(view: View  ) : RecyclerView.ViewHolder(view) {
         fun bind(string: String) {
             itemView.tvMessageMe.text = string
+
+
         }
     }
 
-    inner class ViewHolderYou(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ViewHolderYou(view: View, ) : RecyclerView.ViewHolder(view) {
         fun bind(string: String) {
             itemView.tvMessageYou.text = string
+            // load our user
+            val uri =VIEW_TYPE_YOU
+
+
+
+
         }
     }
+
+
 }

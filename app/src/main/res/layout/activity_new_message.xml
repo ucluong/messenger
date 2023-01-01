@@ -4,19 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".ui.newmessage.NewMessageActivity">
+
+
+    <EditText
+        android:id="@+id/Edt_messageActivity"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="Enter Message"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnSeand"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnSeand"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="3dp"
+        android:background="@drawable/photo_buton"
+        android:text="send"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Edt_messageActivity" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyViewNewMesss"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="16dp"
+        android:background="#23B1F1"
         android:clipToPadding="false"
-        app:stackFromEnd="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/Edt_messageActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:stackFromEnd="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

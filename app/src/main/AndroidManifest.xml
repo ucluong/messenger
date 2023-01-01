@@ -13,8 +13,17 @@
         android:theme="@style/Theme.FastChatMesss"
         tools:targetApi="31">
         <activity
+            android:name=".ChatLogActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.newmessage.NewMessageActivity"
             android:exported="false">
+
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -22,6 +31,8 @@
         <activity
             android:name=".ui.message.MessengerActivity"
             android:exported="true">
+
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -29,11 +40,8 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -41,6 +49,13 @@
         <activity
             android:name=".ui.signup.RegisterActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

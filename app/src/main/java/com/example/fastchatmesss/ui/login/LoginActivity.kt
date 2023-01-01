@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.fastchatmesss.R
 import com.example.fastchatmesss.base.BaseActivity
+import com.example.fastchatmesss.data.User
 import com.example.fastchatmesss.ui.message.MessengerActivity
 import com.example.fastchatmesss.ui.signup.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -55,6 +56,10 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         tvBackTo.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+    }
+
+    override fun putExtra(keyData: String, it: User) {
+        TODO("Not yet implemented")
     }
 
     override fun initToolbar() {

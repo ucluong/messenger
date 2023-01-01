@@ -15,10 +15,22 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_messenger.*
 
+
 class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
     private val messengerAdapter by lazy { MessengerAdapter { user ->
+        // cick vào 1 item chuyển sang nd messs
+
+        val intent = Intent(this, NewMessageActivity::class.java)
+        intent.putExtra(KEYGUARD_SERVICE,user.username)
+        startActivity(intent)
+        finish()
+
+
+
 
     } }
+
+
 
     override fun initViews() {
         // kiểm tra nếu uild == null, tức là người dùng chưa đăng nhập, thì back lại màn hình Login
@@ -33,6 +45,7 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val usersList = mutableListOf<User>()
                 snapshot.children.forEach {
+
                  val user = it.getValue(User::class.java)
                     user?.let {
                             it1 -> usersList.add(it1)
@@ -49,12 +62,23 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
 
         listUser.apply {
             adapter = messengerAdapter
+
+
         }
+
+
+
 
     }
 
     override fun initActions() {
 
+
+
+    }
+
+    override fun putExtra(keyData: String, it: User) {
+        TODO("Not yet implemented")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,6 +93,9 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
                 intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or((Intent.FLAG_ACTIVITY_NEW_TASK))
                 startActivity(intent)
             }
+
+
+
         }
 
         return super.onOptionsItemSelected(item)

@@ -9,18 +9,18 @@
         android:id="@+id/tvMessageMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="1"
-        android:layout_marginStart="12dp"
-        android:text="Abc"
-        android:textSize="16sp"
-        android:paddingHorizontal="16dp"
-        android:textColor="@color/purple_200"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/photo_buton"
-        android:gravity="end"
-        android:layout_marginEnd="12dp"
+        android:maxWidth="260dp"
+        android:padding="10dp"
+        android:paddingHorizontal="16dp"
+        android:text="Tiện ích mở rộng Android dành cho người dùng có thể chuyển đổi"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.fastchatmesss.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fastchatmesss.data.User
 import com.example.fastchatmesss.utils.LoadingProgress
 
 abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
@@ -46,5 +47,7 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
             e.printStackTrace()
         }
     }
+
+    abstract fun putExtra(keyData: String, it: User)
 
 }
