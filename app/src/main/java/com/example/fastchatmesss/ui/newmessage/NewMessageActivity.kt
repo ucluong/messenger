@@ -1,9 +1,9 @@
 package com.example.fastchatmesss.ui.newmessage
 
-import android.util.Log
 import com.example.fastchatmesss.R
 import com.example.fastchatmesss.base.BaseActivity
 import com.example.fastchatmesss.data.ChatMessage
+import com.example.fastchatmesss.data.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -14,19 +14,24 @@ import kotlinx.android.synthetic.main.activity_new_message.*
 
 class NewMessageActivity : BaseActivity(R.layout.activity_new_message) {
     val messagesList = mutableListOf<ChatMessage>()
+    private val user by lazy { intent.getSerializableExtra(KEYGUARD_SERVICE) as? User }
 
     private val newMessageAdapter by lazy {
-        NewMessageAdapter {}
+        NewMessageAdapter {
+
+        }
     }
 
     override fun initViews() {
+        newMessageAdapter.user = user
         recyViewNewMesss.apply {
             adapter = newMessageAdapter
         }
-//
-        val username = intent.getStringExtra(KEYGUARD_SERVICE)
-        supportActionBar?.title = username
+        supportActionBar?.title = user?.username
         listenForMessages()
+    }
+
+    override fun initActions() {
         btnSend.setOnClickListener {
             performSendMesage()
         }
@@ -34,11 +39,10 @@ class NewMessageActivity : BaseActivity(R.layout.activity_new_message) {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("messages")
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/${FirebaseAuth.getInstance().uid}/${user?.uid}")
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 hideLoading()
-                Log.d("snapshotsssss", snapshot.value.toString())
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
                     messagesList.add(chatMessage)
@@ -66,21 +70,20 @@ class NewMessageActivity : BaseActivity(R.layout.activity_new_message) {
 
     private fun performSendMesage() {
         // how do we actually send a message to firebase...
-        // khai báo messages lên firebase
+        // khai báo gửi messages lên firebase
+        if (edtMessage.text.toString().isEmpty()) return
         showLoading()
         val text = edtMessage.text.toString()  //
+        //from id là người gửi
         val fromId = FirebaseAuth.getInstance().uid
-        val toId = Unit.toString()
+        //toId là người nhận
+        val toId = user?.uid.toString()
         if (fromId == null) return
-        val refaerence = FirebaseDatabase.getInstance().getReference("messages").push()    //
-        val chatMessage =
-            refaerence.key?.let { ChatMessage(it, text, fromId, toId, System.currentTimeMillis()) }
+//        val refaerence = FirebaseDatabase.getInstance().getReference("messages").push()    //
+        val refaerence = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()    //
+        val chatMessage = refaerence.key?.let { ChatMessage(it, text, fromId, toId, System.currentTimeMillis()) }
         refaerence.setValue(chatMessage)  //
         edtMessage.setText("")
-    }
-
-    override fun initActions() {
-
     }
 
 }

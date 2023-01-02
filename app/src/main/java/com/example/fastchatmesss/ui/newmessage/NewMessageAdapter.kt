@@ -26,6 +26,13 @@ class NewMessageAdapter(val onClick: (User) -> Unit): RecyclerView.Adapter<Recyc
             notifyDataSetChanged()
         }
 
+    var user : User? = null
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             VIEW_TYPE_ME -> {
@@ -59,7 +66,6 @@ class NewMessageAdapter(val onClick: (User) -> Unit): RecyclerView.Adapter<Recyc
     override fun getItemCount(): Int = data.size
 
 
-
     inner class ViewHolderMe(view: View  ) : RecyclerView.ViewHolder(view) {
         fun bind(item: ChatMessage) {
             itemView.tvMessageMe.text = item.text
@@ -71,7 +77,7 @@ class NewMessageAdapter(val onClick: (User) -> Unit): RecyclerView.Adapter<Recyc
             itemView.tvMessageYou.text = item.text
             // load our user
             Glide.with(itemView.context)
-                .load(item)
+                .load(user?.imageUri)
                 .centerCrop()
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(itemView.circleImageView)
