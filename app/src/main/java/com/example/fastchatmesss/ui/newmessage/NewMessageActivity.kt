@@ -81,8 +81,10 @@ class NewMessageActivity : BaseActivity(R.layout.activity_new_message) {
         if (fromId == null) return
 //        val refaerence = FirebaseDatabase.getInstance().getReference("messages").push()    //
         val refaerence = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()    //
+        val toRefaerence = FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()    //
         val chatMessage = refaerence.key?.let { ChatMessage(it, text, fromId, toId, System.currentTimeMillis()) }
         refaerence.setValue(chatMessage)  //
+        toRefaerence.setValue(chatMessage)  //
         edtMessage.setText("")
     }
 
