@@ -10,7 +10,6 @@ import com.example.fastchatmesss.R
 import com.example.fastchatmesss.base.BaseActivity
 import com.example.fastchatmesss.data.User
 import com.example.fastchatmesss.ui.login.LoginActivity
-import com.example.fastchatmesss.ui.message.MessengerActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -39,11 +38,6 @@ class RegisterActivity : BaseActivity(R.layout.activity_regisrer) {
             }
         }
     }
-
-    override fun putExtra(keyData: String, it: User) {
-        TODO("Not yet implemented")
-    }
-
 
     private fun uploadImageToFirebase() {
         showLoading()

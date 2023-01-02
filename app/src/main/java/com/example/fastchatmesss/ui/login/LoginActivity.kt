@@ -58,9 +58,6 @@ class LoginActivity : BaseActivity(R.layout.activity_login) {
         }
     }
 
-    override fun putExtra(keyData: String, it: User) {
-        TODO("Not yet implemented")
-    }
 
     override fun initToolbar() {
 

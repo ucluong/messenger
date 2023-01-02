@@ -9,30 +9,31 @@
 
 
     <EditText
-        android:id="@+id/Edt_messageActivity"
+        android:id="@+id/edtMessage"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="8dp"
         android:background="@color/white"
         android:ems="10"
-        android:hint="Enter Message"
+        android:paddingHorizontal="24dp"
+        android:hint="Enter message"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnSeand"
+        app:layout_constraintEnd_toStartOf="@+id/btnSend"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnSeand"
+        android:id="@+id/btnSend"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="3dp"
         android:background="@drawable/photo_buton"
-        android:text="send"
+        android:text="Send"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Edt_messageActivity" />
+        app:layout_constraintStart_toEndOf="@+id/edtMessage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyViewNewMesss"
@@ -42,7 +43,7 @@
         android:clipToPadding="false"
         android:paddingHorizontal="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/Edt_messageActivity"
+        app:layout_constraintBottom_toTopOf="@+id/edtMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -19,15 +19,9 @@ import kotlinx.android.synthetic.main.activity_messenger.*
 class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
     private val messengerAdapter by lazy { MessengerAdapter { user ->
         // cick vào 1 item chuyển sang nd messs
-
         val intent = Intent(this, NewMessageActivity::class.java)
         intent.putExtra(KEYGUARD_SERVICE,user.username)
         startActivity(intent)
-        finish()
-
-
-
-
     } }
 
 
@@ -62,23 +56,12 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
 
         listUser.apply {
             adapter = messengerAdapter
-
-
         }
-
-
-
 
     }
 
     override fun initActions() {
 
-
-
-    }
-
-    override fun putExtra(keyData: String, it: User) {
-        TODO("Not yet implemented")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,9 +76,6 @@ class MessengerActivity : BaseActivity(R.layout.activity_messenger) {
                 intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or((Intent.FLAG_ACTIVITY_NEW_TASK))
                 startActivity(intent)
             }
-
-
-
         }
 
         return super.onOptionsItemSelected(item)

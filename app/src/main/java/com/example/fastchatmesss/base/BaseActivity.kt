@@ -48,6 +48,4 @@ abstract class BaseActivity(layoutId: Int) : AppCompatActivity(layoutId) {
         }
     }
 
-    abstract fun putExtra(keyData: String, it: User)
-
 }
